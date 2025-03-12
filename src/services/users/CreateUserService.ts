@@ -25,7 +25,8 @@ class CreateUserService{
             const user = {
                 name,
                 email,
-                createdAt: new Date().toLocaleDateString()
+                createdAt: new Date().toLocaleDateString(),
+                admin: false
             }
     
             const createdUser = await usersRef.doc(userRecord.uid).set(user);       

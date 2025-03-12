@@ -15,7 +15,8 @@ class MeService{
                 id: doc.id,
                 name: doc.data()?.name,
                 email: doc.data()?.email,
-                createdAt: doc.data()?.createdAt 
+                createdAt: doc.data()?.createdAt,
+                admin: doc.data()?.admin
             }
             
             return me;
