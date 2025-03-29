@@ -11,9 +11,12 @@ class SignInUserController{
         const signUserService = new SignInUserService();
         const user = await signUserService.handle({email, password})
         
-        
-        res.json(user);
+        const { status }: any = user;
+
+
+        res.status(status).json(user);
     }
+
 
 
 }

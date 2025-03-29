@@ -29,12 +29,13 @@ class SignInUserService{
                 
             }
 
-            
-            return user;
+            let userResponse = {...user, message: "Usuário autenticado com sucesso!", status: 200}
+
+            return userResponse;
 
         }).catch((error) => {
-            const {code, message} = error;
-            return {code, message};
+            const { code } = error;
+            return {code, message: "Acesso negado, verifique as credenciais.", status: 403};
         })
 
 
@@ -42,5 +43,6 @@ class SignInUserService{
     }
 
 }
+
 
 export { SignInUserService }

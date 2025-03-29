@@ -6,6 +6,7 @@ import { CreateCaregoryService } from "../../services/categories/CreateCaregoryS
 
 class CreateCaregoryController{
     async handle(req: Request, res: Response){
+        let userId = req.userId;
         const { title, isMonthly, day } = req.body;
 
         if(day != "" && isNaN(day)){
@@ -21,7 +22,6 @@ class CreateCaregoryController{
 
         }
         
-        let userId = req.userId;
 
         const createCategoryService = new CreateCaregoryService();
         const category = await createCategoryService.handle({userId, title, isMonthly, day});

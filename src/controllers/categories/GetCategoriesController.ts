@@ -7,9 +7,11 @@ class GetCategoriesController{
     async handle(req: Request, res: Response){
         const userId = req.userId;
         const getCategoriesService = new GetCategoriesService();
-        const categories = await getCategoriesService.handle({userId});
+        const categoriesList = await getCategoriesService.handle({userId});
 
-        res.json(categories);
+        const { status, categories }: any = categoriesList;
+
+        res.status(status).json(categories);
     }
 }
 

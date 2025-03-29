@@ -11,21 +11,32 @@ const port = 3333;
 app.use(router);
 
 
-//Middleware de tratamento de erros
+
+// Middleware de tratamento de erros
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 
-    if(error instanceof Error){
-        res.status(400).json({
-            error: error.message
+
+    if(!(error instanceof Error)){
+        
+        res.status(500).json({
+            status: 'error',
+            message: 'Internal server error'
         })
     }
 
-    res.status(500).json({
-        status: 'error',
-        message: 'Internal server error'
-    })
+//     // if(error instanceof Error){
+//     //     res.status(400).json({
+//     //         error: error.message
+//     //     })
+//     // }
+
+//     // res.status(500).json({
+//     //     status: 'error',
+//     //     message: 'Internal server error'
+//     // })
 
 })
+
 
 app.listen(port, () => {
     console.log("server running...")

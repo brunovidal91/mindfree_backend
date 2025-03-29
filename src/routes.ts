@@ -12,6 +12,7 @@ import { GetUsersController } from "./controllers/users/GetUsersController";
 import { CreateUserController } from "./controllers/users/CreateUserController";
 import { DeleteUserController } from "./controllers/users/DeleteUserController";
 import { UpdateUserController } from "./controllers/users/UpdateUserController";
+import { UpdatePasswordController } from "./controllers/users/UpdatePasswordController";
 
 //Login
 import { SignInUserController } from "./controllers/login/SignInUserController";
@@ -41,7 +42,8 @@ import { RecoveryController } from "./controllers/recovery/RecoveryController";
 router.get('/users', authToken, new GetUsersController().handle);
 router.post('/users/add', new CreateUserController().handle);
 router.delete('/users/delete/:id', authToken, new DeleteUserController().handle);
-router.put('/users/:id', authToken, new UpdateUserController().handle);
+router.put('/users/update/:id', authToken, new UpdateUserController().handle);
+router.put('/users/update', authToken, new UpdatePasswordController().handle);
 
 //Login
 router.post('/login', new SignInUserController().handle);
@@ -52,7 +54,7 @@ router.get('/leave', authToken, new LogoutController().handle);
 //Categories
 router.post('/categories/add', authToken, new CreateCaregoryController().handle);
 router.get('/categories', authToken, new GetCategoriesController().handle);
-router.delete('/categories', authToken, new DeleteCategoryController().handle);
+router.delete('/categories/:id', authToken, new DeleteCategoryController().handle);
 
 //Transactions
 router.post('/transactions', authToken, new CreateTransactionController().handle);
