@@ -22,7 +22,8 @@ class GetCategoriesService{
                     id: doc.id,
                     title: doc.data().title,
                     isMonthly: doc.data().isMonthly,
-                    day: doc.data().day
+                    day: doc.data().day,
+                    isIncome: doc.data().isIncome
                 }
     
                 categories.push(category);

@@ -1,4 +1,3 @@
-import { UserRecord } from "firebase-admin/lib/auth/user-record";
 import { db, admin } from "../../data/firebase";
 
 
@@ -12,7 +11,7 @@ class CreateUserService{
 
     async handle({ name, email, password }: User){
 
-         
+         let userID: string;
 
         let userCreated = admin.auth().createUser({
             email: email,
@@ -20,6 +19,8 @@ class CreateUserService{
             emailVerified: false,
             disabled: false
         }).then(async (userRecord) => {
+
+            userID = userRecord.uid;
 
             const usersRef = db.collection('users');
             const user = {
@@ -33,7 +34,23 @@ class CreateUserService{
 
             return createdUser;
 
-        }).catch((error) => {
+        }).then(async () => {
+
+            const userConfig = {
+                currentYear: admin.firestore.Timestamp.now().toDate().getFullYear().toString(),
+                investmentRate: "0.20"
+            }
+    
+            const configRef = db.collection("config");
+            const config = await configRef.doc(userID).create(userConfig);
+
+            const response: object = {config, status: 200}
+
+            return response;
+        })
+        
+        
+        .catch((error) => {
 
             const {code, message} = error;
             return {code: code, message: message}

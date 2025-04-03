@@ -4,17 +4,19 @@ interface Category{
     userId: string,
     title: string,
     isMonthly: boolean,
-    day?: string
+    day?: string,
+    isIncome: boolean
 }
 
 class CreateCaregoryService{
-    async handle({userId, title, isMonthly, day}: Category){
+    async handle({userId, title, isMonthly, day, isIncome}: Category){
         const categoryRef = db.collection('categories'+userId);
         const id = categoryRef.doc().id;
         const category = await categoryRef.doc(id).create({
             title,
             isMonthly,
-            day
+            day,
+            isIncome
         })
 
         return category;

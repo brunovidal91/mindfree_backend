@@ -7,7 +7,7 @@ import { CreateCaregoryService } from "../../services/categories/CreateCaregoryS
 class CreateCaregoryController{
     async handle(req: Request, res: Response){
         let userId = req.userId;
-        const { title, isMonthly, day } = req.body;
+        const { title, isMonthly, day, isIncome } = req.body;
 
         if(day != "" && isNaN(day)){
             
@@ -15,16 +15,16 @@ class CreateCaregoryController{
             return
         }
 
-        if(Number(day) < 1 || Number(day) > 30){
+        if(Number(day) < 1 || Number(day) > 31){
 
-            res.status(400).json({message: "o dia precisa ser entre 1 e 30"});
+            res.status(400).json({message: "o dia precisa ser entre 1 e 31"});
             return
 
         }
         
 
         const createCategoryService = new CreateCaregoryService();
-        const category = await createCategoryService.handle({userId, title, isMonthly, day});
+        const category = await createCategoryService.handle({userId, title, isMonthly, day, isIncome});
 
         
         res.json(category);

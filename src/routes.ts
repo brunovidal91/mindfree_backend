@@ -36,6 +36,11 @@ import { MeController } from "./controllers/me/MeController";
 //Recovery
 import { RecoveryController } from "./controllers/recovery/RecoveryController";
 
+//Config
+
+import { UpdateConfigController } from "./controllers/config/UpdateConfigController";
+import { GetConfigController } from "./controllers/config/GetConfigController";
+
 // ------------- Routes ------------------
 
 //Users
@@ -66,5 +71,10 @@ router.get('/me', authToken, new MeController().handle);
 
 //Recovery
 router.post('/recovery', new RecoveryController().handle);
+
+//Config
+router.put('/config', authToken, new UpdateConfigController().handle);
+router.get('/config', authToken, new GetConfigController().handle);
+
 
 export { router };
