@@ -1,3 +1,8 @@
 /node_modules
 /readme.md
 /src/data
+.vercel
+/dist
+/dist/*
+/dist/data
+/data/firebase-admin-config.json
